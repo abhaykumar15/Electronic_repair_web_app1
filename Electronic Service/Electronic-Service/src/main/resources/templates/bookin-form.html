@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Service | TechSwift</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: #0d3055;
+      color: white;
+    }
+
+    /* Header/Navbar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #00172f;
+      padding: 25px 50px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    header h2 {
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    header a {
+      color: #ffc300;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #ffc300;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    header a:hover {
+      background-color: #ffc300;
+      color: #001d3d;
+    }
+
+    /* Container */
+    .container {
+      max-width: 600px;
+      margin: 80px auto;
+      background: #003566;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      padding: 40px 50px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffd60a;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #ffd60a;
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background-color: #002b5c;
+      color: #ffffff;
+      transition: 0.3s;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #b0b0b0;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: 2px solid #ffc300;
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      background-color: #ffc300;
+      color: #001d3d;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ffd60a;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #001d3d;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 80px;
+      border-top: 2px solid #ffc300;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      opacity: 0.85;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+  <h2>TechSwift - Book Service</h2>
+  <a th:href="@{/customer/dashboard}">Back to Dashboard</a>
+</header>
+
+<!-- Booking Form -->
+<div class="container">
+  <h2 th:text="'Book ' + ${service.serviceName}"></h2>
+
+  <form th:action="@{/customer/book}" th:object="${booking}" method="post">
+    <input type="hidden" name="serviceCategoryId" th:value="${service.id}" />
+
+    <label>Device Details:</label>
+    <input type="text" th:field="*{deviceDetails}" placeholder="e.g. iPhone 14 Pro / Dell XPS 15" required />
+
+    <label>Issue Description:</label>
+    <textarea th:field="*{issueDescription}" placeholder="Describe the problem briefly..." required></textarea>
+
+    <button type="submit" class="btn">Submit Booking</button>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 TechSwift. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
